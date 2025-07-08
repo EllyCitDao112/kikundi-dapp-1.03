@@ -3,12 +3,11 @@ name: 📦 Deploy Kikundi DApp to GitHub Pages
 on:
   push:
     branches:
-      - main  # or 'master' if that's your default branch
+      - main
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v3
@@ -18,14 +17,10 @@ jobs:
         with:
           node-version: '18'
 
-      - name: 📦 Install dependencies
-        run: |
-          cd frontend
-          npm install
-
       - name: 🚀 Build & Deploy
         run: |
           cd frontend
+          npm install
           npm run deploy
         env:
           CI: true
