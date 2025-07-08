@@ -2,43 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 
 function App() {
-  const [account, setAccount] = useState(null);
+  const [wallet, setWallet] = useState(null);
+  const [address, setAddress] = useState('');
+  const [balance, setBalance] = useState('');
 
   const connectWallet = async () => {
-    if (typeof window.ethereum !== 'undefined') {
+    if (window.ethereum) {
       try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setAccount(accounts[0]);
-        console.log("Wallet connected:", accounts[0]);
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const accounts = await provider.send("eth_requestAccounts", []);
+        const signer = await provider.getSigner();
+        const userAddress = await signer.getAddress();
+        const bal = await provider.getBalance(userAddress);
+        setWallet(provider);
+        setAddress(userAddress);
+        setBalance(ethers.formatEther(bal));
       } catch (err) {
-        console.error("Wallet connection failed", err);
+        console.error("Wallet connection failed:", err);
       }
     } else {
-      alert("⚠️ MetaMask or Web3 wallet not detected.");
+      alert("Please install MetaMask to use this app.");
     }
   };
 
-  useEffect(() => {
-    connectWallet();
-  }, []);
-
   return (
-    <div style={{ fontFamily: 'Arial', padding: '2rem', textAlign: 'center' }}>
-      <h1 style={{ color: '#00cc99' }}>🌱 Kikundi DApp</h1>
-      {account ? (
-        <p>✅ Connected: <strong>{account}</strong></p>
+    <div style={{ padding: 20, fontFamily: 'sans-serif', color: 'white', backgroundColor: '#0e0e0e', minHeight: '100vh' }}>
+      <h1>Kikundi DApp</h1>
+      {!address ? (
+        <button onClick={connectWallet}>Connect Wallet</button>
       ) : (
-        <button onClick={connectWallet} style={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          backgroundColor: '#00cc99',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer'
-        }}>
-          Connect Wallet
-        </button>
+        <div>
+          <p>✅ Connected: {address}</p>
+          <p>💰 Balance: {balance} ETH</p>
+        </div>
       )}
     </div>
   );
