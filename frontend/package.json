@@ -2,7 +2,8 @@
   "name": "kikundi-dapp",
   "version": "1.0.3",
   "private": false,
-  "homepage": "https://ellycitdao112.github.io/kikundi-dapp-1.03/",
+  "homepage": "https://ellycitdao112.github.io/kikundi-dapp-1.03/"
+",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
