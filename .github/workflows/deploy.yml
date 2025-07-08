@@ -1,29 +1,29 @@
-name: Deploy React App to GitHub Pages
+name: 📦 Deploy Kikundi DApp to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Or your default branch
+      - main  # or 'master' if that's your default branch
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: ⬇️ Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: 🟢 Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
-      - name: Install Dependencies
+      - name: 📦 Install dependencies
         run: |
           cd frontend
           npm install
 
-      - name: Deploy to GitHub Pages
+      - name: 🚀 Build & Deploy
         run: |
           cd frontend
           npm run deploy
