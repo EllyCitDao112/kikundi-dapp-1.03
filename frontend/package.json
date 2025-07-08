@@ -17,29 +17,5 @@
     "react-scripts": "5.0.1",
     "@xmtp/xmtp-js": "^9.0.0",
     "gh-pages": "^5.0.0"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "keywords": [
-    "kikundi",
-    "dapp",
-    "dao",
-    "staking",
-    "firebase",
-    "xmtp",
-    "web3",
-    "binance-smart-chain"
-  ],
-  "author": "Kikundi DAO",
-  "license": "MIT"
+  }
 }
